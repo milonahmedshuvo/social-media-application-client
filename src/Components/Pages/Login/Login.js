@@ -1,7 +1,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/Context';
 import imageBg from '../../../image/login.png';
 
@@ -10,7 +10,7 @@ import imageBg from '../../../image/login.png';
 
 const Login = () => {
    const {user, singIn, googleSingIn}=useContext(AuthContext)
-
+   const navigate=useNavigate()
    
 
     const handleLogin = (event) => {
@@ -21,6 +21,7 @@ const Login = () => {
         singIn(email,password)
         .then((res)=>{
             console.log(res)
+            navigate('/')
             
         })
         .catch((err)=>console.log(err))
@@ -31,6 +32,7 @@ const Login = () => {
         googleSingIn(provider)
         .then((result)=>{
             console.log(result)
+            navigate('/')
         })
         .catch((err)=>console.log(err))
     }

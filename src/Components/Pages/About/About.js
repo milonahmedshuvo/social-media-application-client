@@ -12,7 +12,7 @@ const About = () => {
     const {data:myDetails=[], isLoading, refetch}=useQuery({
         queryKey:['myDetails', user?.email],
         queryFn: async ()=>{
-         const data = await fetch(`http://localhost:5000/myDetails?email=${user?.email}`);
+         const data = await fetch(`https://social-media-application-server.vercel.app/myDetails?email=${user?.email}`);
          const result= await data.json();
          return result;
         }

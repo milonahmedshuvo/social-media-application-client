@@ -7,7 +7,7 @@ const MediaRoute = () => {
     const { data: getPost = [], isLoading, refetch } = useQuery({
         queryKey: ['getPost'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/getPost');
+            const res = await fetch('https://social-media-application-server.vercel.app/getPost');
             const result = await res.json();
             return result;
         }

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import imageBg from '../../../image/socialBg.png'
 import toast, { Toaster } from 'react-hot-toast';
+import { AuthContext } from '../../../Context/Context';
+import { Link } from 'react-router-dom';
 
 
 const AddPost = () => {
-
+    const {user}=useContext(AuthContext)
 
     const [img, setimg] = useState(null)
     const imageHostingKey = process.env.REACT_APP_IMGBB_API_KEY
@@ -42,7 +44,7 @@ const AddPost = () => {
                     love:parseFloat(1) 
                 }
         
-                fetch('http://localhost:5000/addPost', {
+                fetch('https://social-media-application-server.vercel.app/addPost', {
                     method: 'POST',
                     headers: {
                         'Content-type': 'application/json'
@@ -95,7 +97,7 @@ const AddPost = () => {
     //         file
     //     }
 
-    //     fetch('http://localhost:5000/addPost', {
+    //     fetch('https://social-media-application-server.vercel.app/addPost', {
     //         method:'POST',
     //         headers:{
     //             'content-type':'application/json'
@@ -145,7 +147,13 @@ const AddPost = () => {
 
 
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Submit</button>
+                               
+
+                                {
+                                    user?.uid ? <button type='submit' className="btn btn-primary">Submit</button> : 
+                                    <Link to='/login'  className="btn btn-primary">Submit</Link>
+                                }
+
                             </div>
                         </div>
                     </form>

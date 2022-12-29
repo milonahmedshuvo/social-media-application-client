@@ -36,7 +36,7 @@ const Register = () => {
             university,
             address
         }
-        fetch('http://localhost:5000/myDetails',{
+        fetch('https://social-media-application-server.vercel.app/myDetails',{
             method:"POST",
             headers:{
                 'content-type':'application/json'

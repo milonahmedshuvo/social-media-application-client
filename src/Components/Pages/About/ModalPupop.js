@@ -15,7 +15,7 @@ const ModalPupop = ({myDetails, onClickHandlerUpdate}) => {
         console.log(name, university, address)
 
 
-        fetch(`http://localhost:5000/addEdit/${email}`,{
+        fetch(`https://social-media-application-server.vercel.app/addEdit/${email}`,{
             method:"PATCH",
             headers:{
                 'content-type':'application/json'
@@ -39,7 +39,7 @@ const ModalPupop = ({myDetails, onClickHandlerUpdate}) => {
     //         console.log(changeText)
 
             
-    //     fetch(`http://localhost:5000/addEdit/${id}`,{
+    //     fetch(`https://social-media-application-server.vercel.app/addEdit/${id}`,{
     //         method:'PATCH',
     //         headers:{
     //             'content-type':'application/json'

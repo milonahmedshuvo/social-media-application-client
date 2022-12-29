@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div>
             <AddPost></AddPost>
-            <h1>Home components</h1>
+            
             <Reactions></Reactions>
         </div>
     );

@@ -1,11 +1,31 @@
-import React, { useContext, useState } from 'react';
-import { FaBeer, FaRegHeart, FaRegHandPointRight } from 'react-icons/fa'
+import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import Loding from '../../Sheared/Loding';
+import { FaBeer, FaRegHeart, FaRegHandPointRight } from 'react-icons/fa'
 
 
-const MediaDetails = ({post}) => {
+const ReactionSingle = ({single}) => {
+
+
+  const {data:singleeeee=[], isLoading, refetch }=useQuery({
+    queryKey:['shorting'],
+    queryFn:async ()=>{
+        const res=await fetch('https://social-media-application-server-milonahmedshuvo.vercel.app/shoting')
+        const result=await res.json()
+        return result
+    }
+  })
+
+
+
+
+
+
+
+
+
+
     const[reaction, setReactions]=useState('')
     const [comment, setComment]=useState('')
     const [comments, setComments]=useState([])
@@ -19,17 +39,7 @@ const MediaDetails = ({post}) => {
     }
 
     
-    const { data: getPost = [], isLoading, refetch } = useQuery({
-        queryKey: ['getPost'],
-        queryFn: async () => {
-            const res = await fetch('https://social-media-application-server.vercel.app/getPost');
-            const result = await res.json();
-            return result;
-        }
-    })
-
-
-
+    
    
   
 
@@ -37,7 +47,7 @@ const MediaDetails = ({post}) => {
 
    const handleLove=(id)=>{
       console.log(id)
-      const reationsClick=parseFloat(post?.love) + 1;
+      const reationsClick=parseFloat(single?.love) + 1;
       
       setReactions( reationsClick)
 
@@ -63,33 +73,30 @@ const MediaDetails = ({post}) => {
         .catch((err)=>console.log(err))
 
       }
-
-
-
       
    }
 
-    
+
 
     return (
         <div>
             {
                 isLoading && <Loding></Loding>
             }
-            <div className="card card-compact w-96 bg-base-100 shadow-xl">
-                <figure><img src={post?.img} alt="Shoes" className='w-full' /></figure>
+            <div className="card card-compact  bg-base-100 shadow-xl">
+                <figure><img src={single?.img} alt="Shoes" className='w-full h-56' /></figure>
                 <div className="card-body">
-                    <h2 className="card-title font-serif text-sky-400">{post?.text}  </h2>
+                    <h2 className="card-title font-serif text-sky-400">{single?.text}  </h2>
                    
 
                     <div className=" flex justify-between my-6">
 
                         <div className='flex justify-center'>
-                        <div onClick={()=> handleLove(post?._id)} className='text-red-600 text-3xl'>
+                        <div onClick={()=> handleLove(single?._id)} className='text-red-600 text-3xl'>
                              <FaRegHeart></FaRegHeart> 
                              </div>
 
-                             <span>{post?.love}</span>
+                             <span>{single?.love}</span>
 
                         </div>
                        
@@ -105,7 +112,7 @@ const MediaDetails = ({post}) => {
 
                       <div>
 
-                      <Link to={`/single/${post?._id}`}>
+                      <Link to={`/single/${single?._id}`}>
 
                       <button className="btn btn-sm bg-purple-500 border-none hover:bg-sky-400 hover:text-violet-600 hover:font-serif hover:font-bold font-serif ">Details</button>
 
@@ -129,4 +136,4 @@ const MediaDetails = ({post}) => {
     );
 };
 
-export default MediaDetails;
+export default ReactionSingle;
